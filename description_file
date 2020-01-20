@@ -1,0 +1,37 @@
+Problem Statement:
+
+Identify components that are missing
+Identify components that are rotated
+
+
+Solution Approach:
+
+1. Apply Object detection to detect all the components in the test image.
+2. The components which do not get classified can be marked as missing.
+3. For each component, take mean and standard deviation of length and breadth of the covering box.
+    - If the length and breadth of any component in test image is similar to that of the same component in training set
+      i.e. lies between (mean +- 2 sigma) then it can be considered not rotated
+    - Else if length and breadth of box surrounding the component are interchangeably similar, then the component can
+      be marked rotated
+
+Hiccup:
+
+1. The given voc format data had incorrect meta data in it. This causes in consistent behaviour while training
+    object detection model
+
+Progress made:
+
+1. Trained yolo model with custom classes after fixing the above data issue.
+ -- Unfortunately the model did not converge with given number of classes, epochs and model size(tiny_yolo) after training
+    for hours on my machine.
+2. script for identifying missing and rotated components:
+ -- Prediction over test images always returned empty list as the model did not converge. Hence I could not test
+    the logic for missing and rotated components.
+
+Take away:
+Overall it was a good learning exercise for me. I feel I could have done better and tried multiple things in time. It
+sure has given me good insight into what nanonets do and if not this time, would definitely like to try some time later.
+
+Thank you for your time,
+Hardik Malhotra
+
